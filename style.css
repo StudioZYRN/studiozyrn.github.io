@@ -1,0 +1,177 @@
+/* The app's bold direction: dark only, no strokes, thin margins, large
+   capitals, solid blocks. Colours and sizes are the app's own tokens
+   (lib/core/theme). Fonts: Apfel Grotezk and Necto Mono, SIL OFL 1.1,
+   licences in fonts/. */
+
+@font-face {
+  font-family: "Apfel Grotezk";
+  src: url("fonts/ApfelGrotezk-Regular.otf") format("opentype");
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Apfel Grotezk";
+  src: url("fonts/ApfelGrotezk-Fett.otf") format("opentype");
+  font-weight: 700;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Necto Mono";
+  src: url("fonts/NectoMono-Regular.otf") format("opentype");
+  font-weight: 400;
+  font-display: swap;
+}
+
+:root {
+  color-scheme: dark;
+  --bg-canvas: #101012;
+  --bg-surface: #1c1c20;
+  --bg-raised: #2a2a30;
+  --text-primary: #f6f6f8;
+  --text-secondary: #9a9aa5;
+  --accent: #4d94ff;
+  --accent-pressed: #8dbaff;
+  --on-accent: #0b1220;
+  --link: #8dbaff;
+  --space-xs: 8px;
+  --space-sm: 12px;
+  --space-md: 16px;
+  --space-xl: 24px;
+  --space-2xl: 32px;
+  --radius: 12px;
+}
+
+* { box-sizing: border-box; }
+
+html { background: var(--bg-canvas); }
+body {
+  margin: 0;
+  background: var(--bg-canvas);
+  color: var(--text-primary);
+  font: 400 17px/1.5 "Apfel Grotezk", -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+main {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: var(--space-xl) var(--space-sm) 64px;
+}
+
+/* Display/Large, Display/XLarge on wide screens. */
+h1 {
+  font-weight: 700;
+  font-size: 40px;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  margin: var(--space-2xl) 0 var(--space-xs);
+}
+@media (min-width: 600px) {
+  h1 { font-size: 56px; }
+}
+
+/* Title/Medium. */
+h2 {
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1.2;
+  text-transform: uppercase;
+  margin: 0 0 var(--space-sm);
+}
+
+p, ul { margin: 0 0 var(--space-sm); }
+p:last-child, ul:last-child { margin-bottom: 0; }
+ul { padding-left: 1.2em; }
+li { margin-bottom: var(--space-xs); }
+li::marker { color: var(--text-secondary); }
+strong { font-weight: 700; }
+
+a { color: var(--link); text-underline-offset: 3px; }
+
+/* Label/Small in Necto Mono: metadata, as in the app. */
+.meta {
+  font-family: "Necto Mono", ui-monospace, monospace;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  margin: 0;
+}
+.meta a { color: var(--text-secondary); }
+
+/* Separated by fill, never by a line. */
+.block {
+  background: var(--bg-surface);
+  border-radius: var(--radius);
+  padding: var(--space-xl) var(--space-md);
+  margin-top: var(--space-xs);
+}
+.lead { margin: var(--space-xl) 0 var(--space-xl); font-size: 17px; }
+
+/* The one colour block on a page: what matters most. */
+.block.accent { background: var(--accent); color: var(--on-accent); }
+.block.accent a { color: var(--on-accent); }
+.block.accent li::marker { color: var(--on-accent); }
+
+/* FlagButton, Large: a block with bold capitals. Fill means pressable. */
+.button {
+  display: inline-flex;
+  align-items: center;
+  min-height: 48px;
+  padding: 0 var(--space-xl);
+  border-radius: var(--radius);
+  font-weight: 700;
+  font-size: 15px;
+  text-transform: uppercase;
+  text-decoration: none;
+  background: var(--accent);
+  color: var(--on-accent);
+}
+.button:active { background: var(--accent-pressed); }
+.button.secondary { background: var(--bg-raised); color: var(--text-primary); }
+.actions { display: flex; flex-wrap: wrap; gap: var(--space-xs); margin-top: var(--space-md); }
+
+/* FlagTag: a pill that tells and is never pressed. Bold capitals,
+   Label Bold/Medium, 30 tall. Only where a short fact needs setting
+   apart, such as the policy's date. */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  height: 30px;
+  padding: 0 var(--space-sm);
+  border-radius: 999px;
+  background: var(--bg-raised);
+  color: var(--text-primary);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.dated { display: flex; align-items: center; gap: var(--space-xs); margin-top: var(--space-sm); }
+
+/* TopBarBack: the back glyph and where it goes, a bare control with a
+   48 touch area, as in the app. */
+.back {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  min-height: 48px;
+  margin-left: -4px;
+  color: var(--text-primary);
+  font-weight: 700;
+  font-size: 15px;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+.back svg { width: 24px; height: 24px; }
+.back path {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 44;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+h1 + .block { margin-top: var(--space-xl); }
